@@ -1,0 +1,38 @@
+#1 – Faça uma função que printa uma matriz da maneira convencional,
+#ou seja, uma linha abaixo da outra.
+
+#exercicio 1 mais comprido
+import matplotlib.pyplot as plt
+
+matriz = [1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]
+
+def criar_matriz(matriz):
+    for linha in range (matriz):
+        print(linha)
+    print()
+
+plt.imshow(matriz)
+plt.colorbar()
+plt.show()
+
+#Assim funciona mas para ficar mais facil podemos criar uma def para nao precisar
+#ficar repetindo o plt sempre...
+
+#-----------------------------------------------------------------------------------------
+
+# exercicio 1 mais curto para os proximos exercicios
+
+def imagem(matriz):#aqui ele criou uma funcao chamada iamegm para nao precisar ficar repetibdo o plt
+    plt.imshow(matriz)
+    plt.colorbar()
+    plt.show()
+    return
+
+matriz = [1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]
+
+
+def criar_matriz(matriz):
+    for linha in range(matriz):
+        print(linha)
+    print()
+imagem(matriz) #ai nos proximos é so escrever imagem(nome) sem precisar escrever plt
