@@ -1,0 +1,57 @@
+import matplotlib.pyplot as plt
+
+def imagem(matriz):
+    plt.imshow(matriz)
+    plt.colorbar()
+    plt.show()
+    return
+
+def criar_matriz(linhas, colunas):
+    matriz = []
+    for i in range(linhas):
+        linha = []
+        for j in range(colunas):
+            linha.append(0)
+        matriz.append(linha)
+    return matriz
+
+#exercicio 3 ----------------------------------------------
+
+def criar_diagonal(linhas, colunas):
+    diagonal = criar_matriz(linhas, colunas)
+    for i in range(len(diagonal)):
+        diagonal[i][i] = 1
+    return diagonal
+
+diagonal = criar_diagonal(10, 10)
+for linha in diagonal:
+    print(linha)
+
+imagem(diagonal)
+
+#exercicio 4 -----------------------------------------------
+
+def criar_diagonal_contraria(linhas,colunas):
+    contra = criar_matriz(linhas,colunas)
+    for i in range (linhas):
+        for j in range (colunas):
+         if i + j == len(contra) - 1:
+             contra[i][j] = 1
+    return contra
+
+contra = criar_diagonal_contraria(10,10)
+for linha in contra:
+    print(linha)
+imagem(contra)
+
+#exercicio 5 --------------------------------------------------
+
+def triangulo_meio():
+    matriz = criar_matriz(10, 10)
+    for i in range(len(matriz)):
+        for j in range(i,len(matriz[0])):
+            matriz[i][j]=1
+    return matriz
+
+triangulo = triangulo_meio()
+imagem(triangulo)
