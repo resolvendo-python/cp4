@@ -1,0 +1,109 @@
+#1 – Faça uma função que printa uma matriz da maneira convencional,
+#ou seja, uma linha abaixo da outra.
+
+import matplotlib.pyplot as plt
+
+def imagem(matriz):#aqui ele criou uma funcao chamada iamegm para nao precisar ficar repetibdo o plt
+    plt.imshow(matriz)
+    plt.colorbar()
+    plt.show()
+    return
+
+
+matriz=[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13, 14, 15, 16]]
+#primeiro vamos definir os numeros da matriz
+#nesse exercicio a matriz é 4x4
+
+def mostra_matriz(matriz): #aqui vamos definir uma funcao(mostrar_matriz) e depois a matriz(numeros)
+    for linha in matriz: #aqui vai ler as linhas que estao dentro da matriz
+        print(linha) #e aqui vai printar essas linhas
+    print() #aqui é só para pular linha pro proximo exercicio
+imagem(matriz)
+
+
+#outro exemplo
+matriz = [1,2],[3,4]
+
+def mostrar_funcao(matriz):
+    for linha in matriz:
+        print(linha)
+
+imagem(matriz)
+
+#2 – Faça uma função que recebe de parâmetros as dimensões (linhas e
+#colunas) e retorna uma matriz preenchida de zeros com essas
+#dimensões.
+
+def cria_matriz_zeros(linhas, colunas):
+    matriz = []  # aqui comeca uma lista matriz vazia para colocarmos os zeros nela
+    for i in range(linhas): # aqui i vai ler a linhas,i = linhas
+        linha = [] #aqui a lista linha tbm comeca vazia
+        for j in range(colunas): # aqui j var ler a colunas,j = colunas
+            linha.append(0)  # o .append adiciona itens a lista ou seja aqui esta adicionando o 0 em cada linha        # adiciona um zero
+        matriz.append(linha) # adiciona a linha com os zeros na matriz
+    return matriz
+
+# --- chamada da função ---
+linhas = 4
+colunas = 4
+m = cria_matriz_zeros(linhas, colunas)
+
+# imprime no console
+print(f"Matriz {linhas}x{colunas}:")
+for linha in m:
+    print(linha)
+
+cria_matriz_zeros(linhas,colunas)
+imagem(m)
+
+
+#3 – Faça uma função que recebe uma matriz quadrada como parâmetro
+#e altera todos os elementos da diagonal para 1.
+
+def criar_matriz(linhas, colunas):
+    matriz = []
+    for i in range(linhas):
+        linha = []
+        for j in range(colunas):
+            linha.append(0)
+        matriz.append(linha)
+    return matriz
+
+def criar_diagonal(linhas, colunas):
+    diagonal = criar_matriz(linhas, colunas)   # ✅ usa criar_matriz
+    for i in range(len(diagonal)):             # percorre as linhas
+        diagonal[i][i] = 1                     # coloca 1 na diagonal
+    return diagonal
+
+diagonal = criar_diagonal(5, 5)
+for linha in diagonal:
+    print(linha)
+
+imagem(diagonal)
+def criar_diagonal_contraria(linhas, colunas):
+    contra = criar_matriz(linhas, colunas)   # ✅ usa criar_matriz
+    for i in range(linhas):            # percorre as linhas
+        for j in range (colunas):
+            if i + j == len(contra) - 1:
+                contra[i][j] = 1                     # coloca 1 na diagonal
+    return contra
+
+contra = criar_diagonal_contraria(5, 5)
+
+for linha in contra:
+    print(linha)
+
+imagem (contra)
+
+def trigonal_superior_bom():
+    matriz = criar_matriz(10, 10)
+    for i in range(len(matriz)):
+        for j in range(i,len(matriz[0])):
+            matriz[i][j]=1
+    return matriz
+
+triangulo = trigonal_superior_bom()
+mostra_matriz(triangulo)
+
+imagem(triangulo)
+
