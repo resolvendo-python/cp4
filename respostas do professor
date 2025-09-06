@@ -1,0 +1,187 @@
+#instalar matplootlib
+#cada sublista é uma linha
+import matplotlib.pyplot as plt
+matriz=[[1,2,3,4],[5,6,7,8],[9,10,11,12]] #mesma quantidade de elementos em todos
+
+def mostra_matriz(matriz):
+    for linha in matriz:
+        print(linha)
+    print()
+    return
+
+#print 7
+print(matriz[1][2])
+
+def elementos_matriz(matriz):
+    for i in range(len(matriz)):
+        for j in range(len(matriz[0])):
+            print(f"matriz[{i}][{j}]={matriz[i][j]}")
+    return  # <<< estava recuado demais; agora percorre toda a matriz
+
+colunas=20
+linhas=10
+def cria_matriz(linhas,colunas):
+    matriz=[]
+    for i in range(linhas):
+        lista=[]
+        for j in range(colunas):
+            lista.append(i) #alterar direção
+        matriz.append(lista)
+    return matriz
+
+#o que caracteriza uma diagonal é i e j serem iguais
+def cria_diagonal_ruim(linhas,colunas):
+    diagonal=cria_matriz(linhas,colunas)  # <<< antes fixava 10x10, agora usa os parâmetros
+    for i in range(len(diagonal)):
+        for j in range(len(diagonal[0])):
+            if i == j:
+                diagonal[i][j]=1
+    return diagonal
+
+def imagem(matriz):
+    plt.imshow(matriz,'hot')  # mantém seu padrão de colormap
+    plt.colorbar()
+    plt.show()
+    return
+
+def cria_diagonal_bom(linhas,colunas):
+    diagonal=cria_matriz(linhas,colunas)
+    for i in range(len(diagonal)):
+        diagonal[i][i]=1
+    return diagonal
+
+def contra_diagonal_ruim(linhas,colunas):
+    contra=cria_matriz(linhas,colunas)
+    for i in range(linhas):
+        for j in range(colunas):
+            if i+j==len(contra)-1:
+                contra[i][j]=1
+    return contra
+
+#chamando função cria_diagonal_bom
+print("cria_diagonal_bom")
+diagonal_bom=cria_diagonal_bom(10,10)
+mostra_matriz(diagonal_bom)
+imagem(diagonal_bom)
+
+#chamando função cria_diagonal_ruim
+print("cria_diagonal_ruim")
+diagonal_ruim=cria_diagonal_ruim(10,10)
+mostra_matriz(diagonal_ruim)
+imagem(diagonal_ruim)
+
+#chamando função contra_diagonal_ruim
+print("contra_diagonal_ruim")
+c = contra_diagonal_ruim(10,10)
+mostra_matriz(c)
+imagem(c)
+
+def contra_diagonal_bom(linhas,colunas):
+    contra=cria_matriz(linhas,colunas)
+    for i in range(len(contra)):          # <<< usava len(diagonal); corrigido
+        j=len(contra)-1-i
+        contra[i][j]=1
+    return contra
+
+#chamando função contra_diagonal_bom
+print("contra_diagonal_bom")
+contra = contra_diagonal_bom(10,10)
+mostra_matriz(contra)
+imagem(contra)
+
+# construção do xadrez (versão 1 - "ruim")
+xadrez=cria_matriz(8,8)
+for i in range(len(xadrez)):
+    for j in range(len(xadrez[0])):
+        if i%2==0:
+            if j %2==0:
+                xadrez[i][j]=0
+            else:
+                xadrez[i][j]=1
+        else:
+            if j %2==0:
+                xadrez[i][j]=1
+            else:
+                xadrez[i][j]=0
+# mostrando xadrez
+print("Xadrez 1")
+imagem(xadrez)
+mostra_matriz(xadrez)
+
+# construção do xadrez (versão 2 - "boa")
+for i in range(len(xadrez)):
+    for j in range(len(xadrez[0])):
+        if i%2==j%2:
+            xadrez[i][j]=0
+        else:
+            xadrez[i][j]=1
+# mostrando xadrez
+print("Xadrez 2")
+imagem(xadrez)
+mostra_matriz(xadrez)
+
+lista=['f','a','d','e','h']
+def inverter_lista(lista):
+    print(f"lista inicial{lista}")
+    ultimo=len(lista)-1
+    for i in range(len(lista)//2):
+        aux=lista[i]
+        lista[i]=lista[ultimo-i]
+        lista[ultimo-i]=aux
+        print(lista)
+    return lista
+
+#chamando inverter lista
+print("Inverter lista")
+inverter=inverter_lista(lista)
+
+#daqui para baixo nao esta completo
+def trigonal_superior_ruim():
+    matriz=cria_matriz(10,10)
+    for i in range(len(matriz)):
+        for j in range(len(matriz[0])):
+            if j>=i:
+                matriz[i][j]=1
+    return matriz
+
+def trigonal_superior_bom():
+    matriz = cria_matriz(10, 10)
+    for i in range(len(matriz)):
+        for j in range(i,len(matriz[0])):
+            matriz[i][j]=1
+    return matriz
+
+# Correção do nome e da lógica (transposta em matriz QUADRADA, in-place)
+def transposta(matriz):
+    for i in range(len(matriz)):
+        for j in range(i, len(matriz[0])):   # <<< começa em j=i para não trocar duas vezes
+            aux=matriz[i][j]
+            matriz[i][j]=matriz[j][i]
+            matriz[j][i]= aux
+            mostra_matriz(matriz)            # mantém seu padrão de mostrar a cada troca
+    return
+
+# --- chamadas para as trigonais ---
+print("trigonal_superior_ruim")
+t1 = trigonal_superior_ruim()
+mostra_matriz(t1)
+imagem(t1)
+
+print("trigonal_superior_bom")
+t2 = trigonal_superior_bom()
+mostra_matriz(t2)
+imagem(t2)
+
+# --- chamada para transposta (usar matriz QUADRADA) ---
+print("transposta (antes/depois)")
+matriz_q = [[1,2,3,4],
+            [5,6,7,8],
+            [9,10,11,12],
+            [13,14,15,16]]
+mostra_matriz(matriz_q)
+imagem(matriz_q)
+
+transposta(matriz_q)     # faz in-place
+
+mostra_matriz(matriz_q)
+imagem(matriz_q)
