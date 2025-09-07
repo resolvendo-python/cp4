@@ -1,0 +1,43 @@
+#PROFESSOR ENSINOU MAS NAO COLOCOU NA LISTA DELE
+
+import matplotlib.pyplot as plt
+
+def mostra_matriz(matriz):
+    for linha in matriz:
+        print(linha)
+    print()
+    return
+
+def imagem(matriz):
+    plt.imshow(matriz)  # mostra como mapa de calor
+    plt.colorbar()
+    plt.show()
+    return
+
+def cria_matriz(linhas, colunas):
+    matriz = []
+    for i in range(linhas):
+        linha = []
+        for j in range(colunas):
+            linha.append(0)
+        matriz.append(linha)
+    return matriz
+
+def cria_circulo(n):
+    matriz = cria_matriz(n, n)
+    centro = n // 2
+    raio = n // 2 - 1              # raio um pouco menor que o tamanho total
+    for i in range(n):
+        for j in range(n):
+            # fórmula da distância entre ponto (i,j) e o centro
+            if (i - centro)**2 + (j - centro)**2 <= raio**2:
+                matriz[i][j] = 1   # dentro do círculo
+            else:
+                matriz[i][j] = 0   # fora do círculo
+    return matriz
+
+# --- Testando ---
+print("Exercício 9 – Padrão de círculo")
+m = cria_circulo(15)   # 15x15
+mostra_matriz(m)
+imagem(m)
