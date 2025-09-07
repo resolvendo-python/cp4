@@ -1,0 +1,36 @@
+import matplotlib.pyplot as plt
+
+def mostra_matriz(matriz):   # só imprime
+    for linha in matriz:
+        print(linha)
+    print()
+    return
+
+def imagem(matriz):   # desenha
+    plt.imshow(matriz)
+    plt.colorbar()
+    plt.show()
+    return
+
+def transposta(matriz):   # faz a transposta in-place
+    for i in range(len(matriz)):
+        for j in range(i, len(matriz[0])):   # começa em j=i para não trocar duas vezes
+            aux = matriz[i][j]
+            matriz[i][j] = matriz[j][i]
+            matriz[j][i] = aux
+            mostra_matriz(matriz)   # imprime a cada troca
+    return
+
+print("transposta (antes/depois)")
+matriz_q = [[1,2,3,4],
+            [5,6,7,8],
+            [9,10,11,12],
+            [13,14,15,16]]
+
+mostra_matriz(matriz_q)
+imagem(matriz_q)
+
+transposta(matriz_q)
+
+mostra_matriz(matriz_q)
+imagem(matriz_q)
