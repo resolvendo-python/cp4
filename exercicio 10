@@ -1,0 +1,34 @@
+import matplotlib.pyplot as plt
+
+def mostra_matriz(matriz):
+    for linha in matriz:
+        print(linha)
+    print()
+    return
+
+def imagem(matriz):
+    # converte "ocupada" = 1 e "vaga" = 0 só pra visualizar
+    mapa = [[1 if x == "ocupada" else 0 for x in linha] for linha in matriz]
+    plt.imshow(mapa)
+    plt.colorbar()
+    plt.show()
+    return
+
+def cinema_distanciado(n=50):
+    matriz = []
+    for i in range(n):
+        linha = []
+        for j in range(n):
+            # só ocupa cadeiras quando linha e coluna forem pares
+            if i % 2 == 0 and j % 2 == 0:
+                linha.append("ocupada")
+            else:
+                linha.append("vaga")
+        matriz.append(linha)
+    return matriz
+
+# --- Testando ---
+print("Exercício 10 – Cinema com distanciamento")
+cinema = cinema_distanciado(10)   # 10x10 só pra enxergar melhor
+mostra_matriz(cinema)
+imagem(cinema)
