@@ -1,0 +1,39 @@
+# Exercício 8 – Tabuleiro de Xadrez (versão boa)
+import matplotlib.pyplot as plt
+
+def mostra_matriz(matriz):
+    for linha in matriz:
+        print(linha)
+    print()
+    return
+
+def imagem(matriz):
+    plt.imshow(matriz)
+    plt.colorbar()
+    plt.show()
+    return
+
+def cria_matriz(linhas, colunas):
+    matriz = []
+    for i in range(linhas):
+        linha = []
+        for j in range(colunas):
+            linha.append(0)
+        matriz.append(linha)
+    return matriz
+
+def cria_xadrez(linhas, colunas):
+    xadrez = cria_matriz(linhas, colunas)
+    for i in range(len(xadrez)):
+        for j in range(len(xadrez[0])):
+            if i % 2 == j % 2:   # mesma paridade (linha e coluna pares ou ímpares)
+                xadrez[i][j] = 0
+            else:                # paridade diferente
+                xadrez[i][j] = 1
+    return xadrez
+
+# --- Testando ---
+print("Exercício 8 – Tabuleiro de Xadrez")
+xadrez = cria_xadrez(8, 8)
+mostra_matriz(xadrez)
+imagem(xadrez)
